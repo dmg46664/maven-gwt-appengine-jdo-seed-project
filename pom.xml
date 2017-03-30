@@ -10,11 +10,13 @@
 	<description>Project to demonstrate GWT, AppEngine and JDO integration with Maven</description>
 	<url>https://github.com/davidbuhler/maven-gwt-appengine-jdo-seed-project</url>
 	<properties>
-		<appengine.version>1.9.18</appengine.version>
+		<!-- Bug at https://github.com/GoogleCloudPlatform/appengine-maven-plugin/blob/master/src/main/java/com/google/appengine/appcfg/AbstractAppCfgMojo.java#L359
+		, workaround is google prefix -->
+		<google.appengine.version>1.9.50</google.appengine.version>
 		<datanucleus.appengine.version>2.1.2</datanucleus.appengine.version>
 		<datanucleus.version>3.1.3</datanucleus.version>
-		<gwt.maven.plugin.version>2.7.0</gwt.maven.plugin.version>
-		<gwt.version>2.7.0</gwt.version>
+		<gwt.maven.plugin.version>2.8.0</gwt.maven.plugin.version>
+		<gwt.version>2.8.0</gwt.version>
 		<hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
 		<jstl.version>1.2</jstl.version>
 		<junit.version>4.12</junit.version>
@@ -32,7 +34,7 @@
 		<slf4j-api.version>1.6.1</slf4j-api.version>
 	</properties>
 	<issueManagement>
-		<url>https://github.com/davidbuhler/maven-gwt-appengine-jdo-seed-project/issuess</url>
+		<url>https://github.com/davidbuhler/maven-gwt-appengine-jdo-seed-project/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 	<licenses>
@@ -60,8 +62,19 @@
 			</roles>
 			<timezone>America/New_York</timezone>
 		</developer>
+    <developer>
+      <name>Daniel Gerson</name>
+      <url>https://github.com/dmg46664</url>
+    </developer>
 	</developers>
 	<dependencies>
+		<!-- Added to override what comes with mojo maven plugin. Appengine needs newer version of xml-apis.
+			This does the job but might need to be altered to provided scope when deployed -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.10.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.codehaus.mojo</groupId>
 			<artifactId>gwt-maven-plugin</artifactId>
@@ -83,7 +96,7 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>${appengine.version}</version>
+			<version>${google.appengine.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -133,13 +146,13 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-testing</artifactId>
-			<version>${appengine.version}</version>
+			<version>${google.appengine.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-stubs</artifactId>
-			<version>${appengine.version}</version>
+			<version>${google.appengine.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -167,6 +180,11 @@
 	<build>
 		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
 		<plugins>
+      <plugin>
+        <groupId>com.google.appengine</groupId>
+        <artifactId>appengine-maven-plugin</artifactId>
+        <version>${google.appengine.version}</version>
+      </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
@@ -179,7 +197,7 @@
 					<extraJvmArgs>-Xss1024k</extraJvmArgs>
 					<module>com.davidbuhler.plaidsuit.Module</module>
 					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
-					<appEngineVersion>${appengine.version}</appEngineVersion>
+					<appEngineVersion>${google.appengine.version}</appEngineVersion>
 				</configuration>
 				<executions>
 					<execution>
