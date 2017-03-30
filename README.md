@@ -5,7 +5,7 @@
 
 ## This project uses the following stack
 * Google Web Toolkit 2.8.0
-* Google App Engine 1.9.18
+* Google App Engine 1.9.50
 * Datanucleus
 * JSR 303: Bean Validation
 * Java Data Objects (JDO) 3.0
