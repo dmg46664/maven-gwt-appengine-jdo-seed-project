@@ -4,7 +4,7 @@
 [Plaid Suit](http://plaid-suit.appspot.com/) is a fully functional CRUD application. It's a way to get started building an HTML application that works across browsers, leveraging the power of Java. It uses Google Web Toolkit with a pure Maven configuration for developers who want to build on top of Google App Engine, using Google's HRD, Schemaless Datastore *without adding framework configuration or plugins to the IDE*. Instead of an example app, this project tries to bridge the gap between a seed app and an example application by providing assets you'll need to configure or utilize before going to production, and those assets considered best-practice.
 
 ## This project uses the following stack
-* Google Web Toolkit 2.7.0
+* Google Web Toolkit 2.8.0
 * Google App Engine 1.9.18
 * Datanucleus
 * JSR 303: Bean Validation
