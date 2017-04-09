@@ -1,3 +1,7 @@
+# DEPRECATED
+
+Use https://github.com/dmg46664/gwt-storage-objectify going forward which uses the new maven plugin.
+
 #Plaid-Suit: A Conventional Seed Project for Google-Stack Developers; that doesn't need any IDE Configuration
 
 ##About
